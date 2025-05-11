@@ -63,3 +63,31 @@ body {
 .hover\:bg-red-700:hover {
   background-color: #c53030;
 }
+.transition-transform {
+  transition: transform 0.3s ease-in-out;
+}
+.hamburger-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: #4a5568; /* Gray background */
+  border-radius: 0.25rem; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hamburger-button:hover {
+  background-color: #2d3748; /* Darker gray on hover */
+}
+
+.hamburger-line {
+  display: block;
+  width: 1.5rem;
+  height: 0.2rem;
+  background-color: white;
+  border-radius: 0.125rem;
+  transition: transform 0.3s ease;
+}

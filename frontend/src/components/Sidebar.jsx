@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 
-const Sidebar = () => {
+const Sidebar = ({ isSidebarVisible, toggleSidebar }) => {
   const navigate = useNavigate(); // Hook to navigate to other routes
 
   const handleLogout = async () => {
@@ -18,29 +18,61 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-screeen w-64 bg-gary-800 text-white flex flex-col">
-      <div className="p-4 text-2xl font-bold border-b border-gary-700">Lifehub</div>
+    <div
+      className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-lg text-gray-900 flex flex-col transition-transform duration-300 ease-in-out ${
+        isSidebarVisible ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
+      {/* Header */}
+      <div className=" ml-10 p-6 text-2xl font-semibold text-gray-900 border-b border-gray-200 flex items-center justify-between">
+        Lifehub
+        <button
+          onClick={toggleSidebar}
+          className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+        >
+          <svg
+            className="w-6 h-6 text-gray-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Navigation */}
       <nav className="flex-1 p-4">
-        <ul className="space-y-4">
+        <ul className="space-y-2">
           <li>
             <NavLink
               to="/dashboard"
               className={({ isActive }) =>
-                isActive
-                  ? "block p-2 bg-gray-700 rounded"
-                  : "block p-2 hover:bg-gray-700 rounded text-black "
+                `block p-3 rounded-lg text-base font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`
               }
             >
-              Dashboared
+              Dashboard
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/todo"
               className={({ isActive }) =>
-                isActive
-                  ? "block p-2 bg-gray-700 rounded"
-                  : "block p-2 hover:bg-gray-700 rounded text-black"
+                `block p-3 rounded-lg text-base font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`
               }
             >
               To-Do List
@@ -50,9 +82,11 @@ const Sidebar = () => {
             <NavLink
               to="/profile"
               className={({ isActive }) =>
-                isActive
-                  ? "block p-2 bg-gray-700 rounded"
-                  : "block p-2 hover:bg-gray-700 rounded text-black"
+                `block p-3 rounded-lg text-base font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`
               }
             >
               Profile
@@ -62,9 +96,11 @@ const Sidebar = () => {
             <NavLink
               to="/settings"
               className={({ isActive }) =>
-                isActive
-                  ? "block p-2 bg-gray-700 rounded"
-                  : "block p-2 hover:bg-gray-700 rounded text-black"
+                `block p-3 rounded-lg text-base font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`
               }
             >
               Settings
@@ -72,10 +108,12 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-      <div className="p-4 border-t border-gray-700">
+
+      {/* Logout Button */}
+      <div className="p-4 border-t border-gray-200">
         <button
           onClick={handleLogout}
-          className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          className="w-full py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200"
         >
           Logout
         </button>
