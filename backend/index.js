@@ -5,6 +5,7 @@ const passport = require("passport");
 const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const db = require("./db");
+const todoRoutes = require("./routes/todos");
 require("dotenv").config();
 
 const app = express();
@@ -98,6 +99,19 @@ app.post("/api/login", (req, res, next) => {
     });
   })(req, res, next);
 });
+app.post("/api/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error("Logout error:", err);
+      return res.status(500).json({ error: "Logout failed" });
+    }
+    req.session.destroy(() => {
+      res.json({ message: "Logged out" });
+    });
+  });
+});
+
+app.use("/api/todos", todoRoutes);
 
 passport.use(
   new (require("passport-local").Strategy)(
@@ -144,7 +158,6 @@ app.post("/api/logout", (req, res) => {
     });
   });
 });  
-
 
 
 

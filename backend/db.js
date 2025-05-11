@@ -17,5 +17,16 @@ db.serialize(() => {
     )
   `);
 });
-
+db.serialize(() => {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS todos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      completed BOOLEAN DEFAULT 0,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id)
+    )
+  `);
+});
 module.exports = db;
