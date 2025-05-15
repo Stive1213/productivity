@@ -19,19 +19,19 @@ router.get("/", (req, res) => {
 
 // Add a new to-do item
 router.post("/", (req, res) => {
-  const { title } = req.body;
+  const { title,deadline,priority } = req.body;
   if (!req.isAuthenticated()) {
     return res.status(401).json({ error: "Not authenticated" });
   }
   db.run(
-    "INSERT INTO todos (userId, title) VALUES (?, ?)",
-    [req.user.id, title],
+    "INSERT INTO todos (userId, title, deadline, priority) VALUES (?, ?, ?, ?)",
+    [req.user.id, title, deadline, priority || "normal"],
     function (err) {
       if (err) {
         console.error("Error adding to-do:", err);
         return res.status(500).json({ error: "Failed to add to-do" });
       }
-      res.status(201).json({ id: this.lastID, title, completed: false });
+      res.status(201).json({ id: this.lastID, title, completed: false, deadline, priority });
     }
   );
 });
