@@ -91,3 +91,29 @@ body {
   border-radius: 0.125rem;
   transition: transform 0.3s ease;
 }
+/* Dark mode overrides */
+html.dark, body.dark, .dark {
+  background-color: #18181b !important;
+  color: #f3f4f6 !important;
+}
+
+.dark .bg-white, .bg-white.dark {
+  background-color: #23232b !important;
+  color: #f3f4f6 !important;
+}
+
+.dark .text-gray-900, .text-gray-900.dark {
+  color: #f3f4f6 !important;
+}
+
+.dark .text-gray-800, .text-gray-800.dark {
+  color: #e5e7eb !important;
+}
+
+.dark .bg-gray-50, .bg-gray-50.dark {
+  background-color: #18181b !important;
+}
+
+.dark .shadow-md, .shadow-md.dark {
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.7) !important;
+}
