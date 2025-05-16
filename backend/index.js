@@ -6,6 +6,7 @@ const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const db = require("./db");
 const todoRoutes = require("./routes/todos");
+const journalRoutes = require("./routes/journals");
 require("dotenv").config();
 
 const app = express();
@@ -112,6 +113,7 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.use("/api/todos", todoRoutes);
+app.use("/api/journals", journalRoutes);
 
 passport.use(
   new (require("passport-local").Strategy)(

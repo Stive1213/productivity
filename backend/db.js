@@ -29,5 +29,17 @@ db.serialize(() => {
     )
   `);
 });
-
+db.serialize(() => {
+  db.run(`
+   CREATE TABLE IF NOT EXISTS jaounal (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      content TEXT NOT NULL,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id)
+    )
+   
+    `);
+});
 module.exports = db;
