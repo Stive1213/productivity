@@ -78,6 +78,21 @@ const Sidebar = ({ isSidebarVisible, toggleSidebar }) => {
               To-Do List
             </NavLink>
           </li>
+              <li>
+            <NavLink
+              to="/journal"
+              className={({ isActive }) =>
+                `block p-3 rounded-lg text-base font-medium transition-colors duration-200 ${
+                  isActive
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`
+              }
+            >
+              Journal
+            </NavLink>
+          </li>
+
           <li>
             <NavLink
               to="/profile"

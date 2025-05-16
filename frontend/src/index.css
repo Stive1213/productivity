@@ -5,115 +5,147 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* Ensure root elements respond to theme */
+html {
+    background-color: #f7fafc; /* Tailwind's bg-gray-50 */
+}
+html.dark {
+    background-color: #1a202c; /* Tailwind's bg-gray-900 */
+}
+
+/* Force root container background */
+div.bg-gray-50 {
+    background-color: #f7fafc !important;
+}
+html.dark div.bg-gray-50 {
+    background-color: #1a202c !important;
+}
+
+/* Tailwind-like utility classes */
 .flex {
-    display:flex;
+    display: flex;
 }
 .h-screen {
-  height: 100vh;
+    height: 100vh;
 }
-
 .w-64 {
-  width: 16rem;
+    width: 16rem;
 }
-
 .flex-1 {
-  flex: 1;
+    flex: 1;
 }
-
 .bg-gray-800 {
-  background-color: #2d3748;
+    background-color: #2d3748;
 }
-
 .text-white {
-  color: white;
+    color: white;
 }
-
 .p-4 {
-  padding: 1rem;
+    padding: 1rem;
 }
-
 .space-y-4 > * + * {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
-
 .border-b {
-  border-bottom: 1px solid #4a5568;
+    border-bottom: 1px solid #4a5568;
 }
-
 .border-t {
-  border-top: 1px solid #4a5568;
+    border-top: 1px solid #4a5568;
 }
-
 .rounded {
-  border-radius: 0.25rem;
+    border-radius: 0.25rem;
 }
-
 .hover\:bg-gray-700:hover {
-  background-color: #4a5568;
+    background-color: #4a5568;
 }
-
 .bg-gray-700 {
-  background-color: #4a5568;
+    background-color: #4a5568;
 }
-
 .bg-red-600 {
-  background-color: #e53e3e;
+    background-color: #e53e3e;
 }
-
 .hover\:bg-red-700:hover {
-  background-color: #c53030;
+    background-color: #c53030;
 }
 .transition-transform {
-  transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 .hamburger-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
-  height: 2rem;
-  background-color: #4a5568; /* Gray background */
-  border-radius: 0.25rem; /* Rounded corners */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: #4a5568;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-
 .hamburger-button:hover {
-  background-color: #2d3748; /* Darker gray on hover */
+    background-color: #2d3748;
 }
-
 .hamburger-line {
-  display: block;
-  width: 1.5rem;
-  height: 0.2rem;
-  background-color: white;
-  border-radius: 0.125rem;
-  transition: transform 0.3s ease;
-}
-/* Dark mode overrides */
-html.dark, body.dark, .dark {
-  background-color: #18181b !important;
-  color: #f3f4f6 !important;
+    display: block;
+    width: 1.5rem;
+    height: 0.2rem;
+    background-color: white;
+    border-radius: 0.125rem;
+    transition: transform 0.3s ease;
 }
 
-.dark .bg-white, .bg-white.dark {
-  background-color: #23232b !important;
-  color: #f3f4f6 !important;
+/* Dark mode styles */
+html.dark .bg-gray-50 {
+    background-color: #1a202c;
+    color: #e2e8f0;
+}
+html.dark .bg-gray-900 {
+    background-color: #1a202c;
+    color: #e2e8f0;
+}
+html.dark .bg-white {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+html.dark .text-gray-600 {
+    color: #a0aec0;
+}
+html.dark .bg-gray-100 {
+    background-color: #23232b;
+    color: #f3f4f6;
+}
+html.dark .bg-green-100 {
+    background-color: #23403a;
+    color: #d1fae5;
+}
+html.dark .bg-yellow-100 {
+    background-color: #4b430f;
+    color: #fde68a;
+}
+html.dark .bg-blue-100 {
+    background-color: #1e293b;
+    color: #bfdbfe;
+}
+html.dark .bg-red-200 {
+    background-color: #4b2323;
+    color: #fecaca;
+}
+html.dark .bg-gray-300 {
+    background-color: #2d2d36;
+    color: #a1a1aa;
+}
+html.dark .bg-gray-800 {
+    background-color: #1a202c;
+}
+html.dark .text-gray-200 {
+    color: #e2e8f0;
+}
+html.dark .hover\:bg-gray-700:hover {
+    background-color: #2d3748;
 }
 
-.dark .text-gray-900, .text-gray-900.dark {
-  color: #f3f4f6 !important;
-}
-
-.dark .text-gray-800, .text-gray-800.dark {
-  color: #e5e7eb !important;
-}
-
-.dark .bg-gray-50, .bg-gray-50.dark {
-  background-color: #18181b !important;
-}
-
-.dark .shadow-md, .shadow-md.dark {
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.7) !important;
+/* Fallback for generic containers */
+html.dark div:not([class*="bg-"]) {
+    background-color: #1a202c;
+    color: #e2e8f0;
 }

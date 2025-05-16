@@ -5,43 +5,37 @@ import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 import TodoList from "./components/TodoList";
+import Journal from "./components/Journal";
 import { useState, useEffect } from "react";
 
 function App() {
   const location = useLocation();
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
 
-  
+  // Apply theme to document and save to localStorage
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) setTheme(savedTheme);
-  }, []);
-
-  
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
+    setIsSidebarVisible((prev) => !prev);
   };
 
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   const noSidebarRoutes = ["/login", "/signup", "/"];
   const noThemeToggleRoutes = ["/login", "/signup", "/"];
 
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900" data-theme={theme}>
       {/* Theme toggle button (hidden on login/signup) */}
       {!noThemeToggleRoutes.includes(location.pathname) && (
         <button
@@ -83,6 +77,7 @@ function App() {
 
       {/* Main content area */}
       <div
+        key={theme} // Force re-render on theme change
         className={`flex-1 transition-all duration-300 ${
           isSidebarVisible && !noSidebarRoutes.includes(location.pathname) ? "ml-64" : "ml-0"
         }`}
@@ -94,6 +89,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/" element={<Login />} />
           <Route path="/todo" element={<TodoList />} />
+          <Route path="/journal" element={<Journal />} />
         </Routes>
       </div>
     </div>
