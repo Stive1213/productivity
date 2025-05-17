@@ -31,7 +31,7 @@ db.serialize(() => {
 });
 db.serialize(() => {
   db.run(`
-   CREATE TABLE IF NOT EXISTS jaounal (
+   CREATE TABLE IF NOT EXISTS journal (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       userId INTEGER NOT NULL,
       title TEXT NOT NULL,
