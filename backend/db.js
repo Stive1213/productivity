@@ -42,4 +42,22 @@ db.serialize(() => {
    
     `);
 });
+db.serialize(() => {
+  db.run(`
+    CREATE TABLE IF NOT EXISTS goals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    category TEXT NOT NULL,
+    frequency_type TEXT NOT NULL,
+    target_value INTEGER NOT NULL,
+    unit TEXT NOT NULL,
+    repeat_count INTEGER NOT NULL,
+    custom_days TEXT,
+    duration_days INTEGER
+    start_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status TEXT DEFAULT 'active'
+  )
+    `)
+})
 module.exports = db;

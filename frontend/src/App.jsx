@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 import TodoList from "./components/TodoList";
 import Journal from "./components/Journal";
+
 import { useState, useEffect } from "react";
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
           isSidebarVisible && !noSidebarRoutes.includes(location.pathname) ? "ml-64" : "ml-0"
         }`}
       >
+        
         <Routes>
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
