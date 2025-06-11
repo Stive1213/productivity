@@ -44,7 +44,7 @@ db.serialize(() => {
 });
 db.serialize(() => {
   db.run(`
-    CREATE TABLE IF NOT EXISTS goals (
+    CREATE TABLE IF NOT EXISTS habits (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     userId INTEGER NOT NULL,
     title TEXT NOT NULL,
@@ -54,10 +54,29 @@ db.serialize(() => {
     unit TEXT NOT NULL,
     repeat_count INTEGER NOT NULL,
     custom_days TEXT,
-    duration_days INTEGER
+    duration_days INTEGER,
     start_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     status TEXT DEFAULT 'active'
   )
     `)
 })
+db.serialize(() => {
+  db.run(`
+   CREATE TABLE IF NOT EXISTS habit_progress (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    habit_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    date DATE NOT NULL,
+    completed_repeats INTEGER DEFAULT 0,      -- e.g., 3 out of 4
+    progress_percentage REAL DEFAULT 0,       -- e.g., 75.0
+    total_value REAL DEFAULT 0,               -- actual value (e.g., 1.5 liters)
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(habit_id) REFERENCES habits(id)
+);
+
+    `)
+})
+
+
 module.exports = db;
